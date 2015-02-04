@@ -1,4 +1,6 @@
 *.swp
+*.swo
+*.swn
 test
 *.o
 libfts.a

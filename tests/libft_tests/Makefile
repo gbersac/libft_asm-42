@@ -6,10 +6,8 @@
 #    By: yyang <yyang@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/01/18 09:55:13 by yyang             #+#    #+#              #
-#    Updated: 2015/02/04 18:48:34 by gbersac          ###   ########.fr        #
+#    Updated: 2015/02/04 21:00:32 by gbersac          ###   ########.fr        #
 #                                                                              #
-# **************************************************************************** #
-                                                       #
 # **************************************************************************** #
 
 #===============================================================================
@@ -39,9 +37,7 @@ RENDU_PATH ?= $(shell grep $(RENDU_PATH_KEY) $(CONFIG_INI_PATH) | cut -d '=' -f 
 endif
 
 all:
-	@echo "#####################test libfts" $(FIRST_RULE) 
 	$(FIRST_RULE)
-	@echo "#####################fin test libfts"
 
 #===============================================================================
 # INCLUDES
@@ -52,10 +48,10 @@ include Makefile_cfg.mk
 #===============================================================================
 # COMMON
 #===============================================================================
-TESTS_PATH = tests
+TESTS_PATH				= tests
 CC_LIBFT_LIB_DEFAULT	= -L ../../libfts -lfts
 CC_FRAMEWORK_LIB		= -L$(FRAMEWORK_PATH) -lmt_framework
-CC_INCLUDES				= -I . -I $(FRAMEWORK_PATH)/includes -I $(RENDU_PATH) -I ../../libfts/inc/
+CC_INCLUDES				= -I . -I $(FRAMEWORK_PATH)/includes -I ../../libfts/inc/
 TEST_FILES				= $(shell find tests -name "*.spec.c" -type f -follow -print | grep -e $(PATTERN) | grep -e $(POST_PATTERN))
 CC_SOURCE				= $(TEST_FILES) main.c utils.c $(CC_SOURCE_EXTRA)
 LIBFT_PATH				= $(RENDU_PATH)/libft
@@ -64,14 +60,9 @@ PROTOTYPES				= $(shell echo "$(TEST_FILES)" | perl -pe "s/.*?\/([^\/ ]*)\.spec\
 CC_DEFINES				= -DPROTOTYPES="$(PROTOTYPES)" -DADD_TESTS="$(ADD_TESTS)" -DRENDU_PATH="\"$(RENDU_PATH)\""
 
 exec_tests:
-	echo "$(TEST_FILES)"
-ifneq ("$(wildcard $(RENDU_PATH)/libft/Makefile)","")
-	make $(RENDU_MAKE_ARG) -k -C $(LIBFT_PATH)
-	$(eval CC_LIBFT_LIB = $(CC_LIBFT_LIB_DEFAULT))
-endif
-ifneq ("$(wildcard $(RENDU_PATH)/Makefile)","")
-	make $(RENDU_MAKE_ARG) -k -C $(RENDU_PATH) $(CC_LIBFT_LIB)
-endif
+	@echo "	Make libft_asm " $(CURDIR)
+	make -k --directory=../../libfts 
+	@echo
 	make -k -C $(FRAMEWORK_PATH)
 	gcc $(CC_FLAGS) $(CC_DEBUG) $(CC_INCLUDES) $(CC_DEFINES) $(CC_SOURCE) -o $(NAME) $(CC_FRAMEWORK_LIB) $(CC_LIBFT_LIB_DEFAULT)
 	./$(NAME) 

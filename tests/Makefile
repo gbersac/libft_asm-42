@@ -6,13 +6,13 @@
 #    By: yyang <yyang@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2014/12/08 14:30:51 by celegran          #+#    #+#              #
-#    Updated: 2015/02/04 18:47:19 by gbersac          ###   ########.fr        #
+#    Updated: 2015/02/04 20:11:57 by gbersac          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 .PHONY: all
 
-all: libft_part1 libft_part2
+all: libft_part1 
 
 libft_part1:
 	@make -C libft_tests part1
@@ -35,4 +35,3 @@ check:
 	RENDU_PATH=$(shell pwd)/testframework/fake_rendu/ft_printf_with_libft make -k ft_printf
 	RENDU_PATH=$(shell pwd)/testframework/fake_rendu/ft_printf make -k ft_printf PATTERN=01
 
-.PHONY: help libft_part1 libft_part2 libft_bonus get_next_line gnl ft_ls ft_printf
