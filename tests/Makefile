@@ -3,56 +3,36 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: gbersac <gbersac@student.42.fr>            +#+  +:+       +#+         #
+#    By: yyang <yyang@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2014/04/22 13:15:39 by gbersac           #+#    #+#              #
-#    Updated: 2015/02/03 20:32:45 by gbersac          ###   ########.fr        #
+#    Created: 2014/12/08 14:30:51 by celegran          #+#    #+#              #
+#    Updated: 2015/02/04 18:47:19 by gbersac          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-################################################################################
-# BASIC VARIABLES															   #
-################################################################################
-
-SRCS				:= main.c 
-PATH_OBJ			:= obj
-PATH_SRC			:= src
-PATH_INC			:= inc
-
-CFLAGS				:= -Wall -Wextra -Werror
-OBJECTS				:= $(patsubst %.c, $(PATH_OBJ)/%.o, $(SRCS))
-
-################################################################################
-# LIBRARY VARIABLES															   #
-################################################################################
-
-export DIR_FT		:= ../$(DIR_FT)
-
-LIB_LIBFT			:= -L$(DIR_FT) -lfts
-
-export DIR_LIB 		:= $(patsubst %,../%,$(DIR_LIB))
-LIBRARY				:= $(LIB_BASICS) $(LIB_LIBFT)
-INCLUDES			:= -I./$(PATH_INC) $(patsubst %,-I%/inc,$(DIR_LIB))
-
-################################################################################
-# BASIC RULES																   #
-################################################################################
-
 .PHONY: all
 
-all: $(NAME)
+all: libft_part1 libft_part2
 
-$(NAME): $(OBJECTS)
-	cc -o $@ $(OBJECTS) $(LIBRARY) $(DEBUG)
+libft_part1:
+	@make -C libft_tests part1
 
-$(PATH_OBJ)/%.o: $(addprefix $(PATH_SRC)/,%.c)
-	@mkdir -p $(PATH_OBJ)
-	cc -c -o $@ $(CFLAGS) $^ $(DEBUG) $(INCLUDES)
+update_deps:
+	rm -rf testframework/v3/lst
+	mkdir -p testframework/v3/lst
+	cp ../projects/common/libft/srcs/lst/* testframework/v3/lst
+	cp ../projects/common/libft/includes/lst.h testframework/v3/includes/lst.h
 
-clean:
-	rm -f $(OBJECTS)
+check:
+	RENDU_PATH=$(shell pwd)/testframework/fake_rendu/libft make -k libft_bonus
+	RENDU_PATH=$(shell pwd)/testframework/fake_rendu/libft_part1 make -k libft_part1
+	RENDU_PATH=$(shell pwd)/testframework/fake_rendu/libft_part2 make -k libft_part2
+	RENDU_PATH=$(shell pwd)/testframework/fake_rendu/libft make -k libft_part2
+	RENDU_PATH=$(shell pwd)/testframework/fake_rendu/get_next_line make -k gnl
+	RENDU_PATH=$(shell pwd)/testframework/fake_rendu/get_next_line_with_libft make -k gnl
+	RENDU_PATH=$(shell pwd)/testframework/fake_rendu/ft_ls make -k ft_ls
+	RENDU_PATH=$(shell pwd)/testframework/fake_rendu/ft_printf make -k ft_printf
+	RENDU_PATH=$(shell pwd)/testframework/fake_rendu/ft_printf_with_libft make -k ft_printf
+	RENDU_PATH=$(shell pwd)/testframework/fake_rendu/ft_printf make -k ft_printf PATTERN=01
 
-fclean: clean
-	rm -f $(NAME)
-
-re: fclean $(NAME)
+.PHONY: help libft_part1 libft_part2 libft_bonus get_next_line gnl ft_ls ft_printf

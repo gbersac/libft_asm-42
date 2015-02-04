@@ -6,7 +6,7 @@
 #    By: gbersac <gbersac@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2013/11/30 12:40:20 by gbersac           #+#    #+#              #
-#    Updated: 2015/02/03 20:27:43 by gbersac          ###   ########.fr        #
+#    Updated: 2015/02/04 17:38:45 by gbersac          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,10 @@
 # SOURCES       															   #
 ################################################################################
 
-SRCS		= bzero.s
+SRCS		= ft_bzero.s ft_strcat.s ft_strcat.s ft_isalpha.s ft_isdigit.s \
+			  	ft_isalnum.s ft_isascii.s ft_isprint.s ft_toupper.s \
+				ft_tolower.s ft_putstr.s ft_strlen.s ft_strcpy.s ft_strdup.s \
+			   	ft_memset.s 
 
 ################################################################################
 # BASIC VARIABLES															   #
