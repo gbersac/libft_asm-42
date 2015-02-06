@@ -13,4 +13,4 @@ size_t      ft_strlen(const char *);
 char        *ft_strcpy(char *, const char *);
 char        *ft_strdup(const char *);
 void        *ft_memset(void *, int, size_t);
-
+void		*ft_memcpy(void *, const void *, size_t);

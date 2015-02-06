@@ -1,7 +1,7 @@
-global _my_pow
+global _bzero
 section .text
 
-_my_pow:
+_bzero:
 push    rbp             ; create stack frame
 mov     rbp, rsp
 
