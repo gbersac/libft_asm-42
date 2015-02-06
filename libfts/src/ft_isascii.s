@@ -2,15 +2,16 @@ global _ft_isascii
 
 section .text
 _ft_isascii:
-    cmp edi, 141      ;compare arg1 to 'a'
-    jb  testuppercase ;if arg1 operand is greater or equal to 'a'
-    cmp edi, 174      ;compare arg1 to 'z'
-    jg  returnfalse   ;if superior return false
-    mov  eax, 1       ;return ok => arg1 is lower case
+    cmp	rdi, 0
+    jb	ret_false    ;if inferior to '0' return false
+    cmp	rdi, 127
+    jg	ret_false    ;if superior to '9' return false
+	jmp ret_true
 
-testuppercase:
-    mov  eax, 1       ;and return 0 if so
+ret_true:
+    mov	eax, 1
+    ret
 
-returnfalse:
-    mov  eax, 0   ; and return 0 if so
-    
+ret_false:
+    mov	eax, 0
+    ret
