@@ -1,7 +1,7 @@
-global _bzero
+global _ft_bzero
 section .text
 
-_bzero:
+_ft_bzero:
 push    rbp             ; create stack frame
 mov     rbp, rsp
 

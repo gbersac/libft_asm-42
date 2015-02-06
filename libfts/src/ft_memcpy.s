@@ -1,4 +1,4 @@
-global _ft_memset
+global _ft_memcpy
 
 section .text
-_ft_memset:
+_ft_memcpy:
