@@ -1,4 +1,17 @@
-global _ft_putstr
+;void ft_puts(char const *s);
+;arg0 = di, arg1 = si, arg2 = dx
+
+global _ft_puts
 
 section .text
-_ft_putstr:
+	extern _ft_strlen
+_ft_puts:
+	mov		rsi, rdi	;arg1 = buf
+	call	_ft_strlen
+
+	mov		rdi, 1		;arg0 = fildes
+	mov		rdx, rax	;arg2 = result of strlen
+	;ssize_t write(int fildes, const void *buf, size_t nbyte)
+	mov     rax, 0x2000004 ; write
+	syscall
+	ret
