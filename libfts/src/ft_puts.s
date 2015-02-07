@@ -6,16 +6,41 @@ global _ft_puts
 section .text
 	extern _ft_strlen
 _ft_puts:
-	cmp		rdi, 0		;test NULL
-	je		ret_
-	mov		rsi, rdi	;arg1 = buf
+	;test null
+	cmp		rdi, 0			;test NULL
+	je		print_null
+
+	;print the pointer
+	mov		rsi, rdi		;arg1 = buf
 	call	_ft_strlen
 
-	mov		rdi, 1		;arg0 = fildes
-	mov		rdx, rax	;arg2 = result of strlen
-	;ssize_t write(int fildes, const void *buf, size_t nbyte)
-	mov     rax, 0x2000004 ; write
+	mov		rdi, 1			;arg0 = fildes
+	mov		rdx, rax		;arg2 = result of strlen
+	mov     rax, 0x2000004	;put syscall as write
+	syscall
+
+	;add '\n'
+	mov		rdi, 1			;arg0 = fildes
+	mov		rsi, end_line	;arg1 = buf
+	mov		rdx, 1			;arg2 = result of strlen
+	mov     rax, 0x2000004	;put syscall as write
+	syscall
+	jmp		ret_
+
+
+print_null:
+	mov     rax, 0x2000004	;put syscall as write
+	mov		rdi, 1			;arg0 = fildes
+	mov		rsi, msg		;arg1 = buf
+	mov		rdx, msg.len	;arg2 = result of strlen
 	syscall
 
 ret_:
 	ret
+
+section .data
+	msg:
+		db	`(null)\n`
+	.len: equ $ - msg
+	end_line: 
+		db	`\n`		
