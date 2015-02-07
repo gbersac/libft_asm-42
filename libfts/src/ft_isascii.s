@@ -9,9 +9,9 @@ _ft_isascii:
 	jmp ret_true
 
 ret_true:
-    mov	eax, 1
+    mov	rax, 1
     ret
 
 ret_false:
-    mov	eax, 0
+    mov	rax, 0
     ret

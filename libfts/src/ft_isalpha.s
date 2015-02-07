@@ -9,13 +9,13 @@ _ft_isalpha:
     jl ret_false
     cmp rdi, 122
     jle ret_true
-    mov eax, 0
+    mov rax, 0
     ret
 
 ret_true:
-    mov eax, 1
+    mov rax, 1
     ret
 
 ret_false:
-    mov eax, 0
+    mov rax, 0
     ret
