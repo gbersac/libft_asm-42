@@ -6,6 +6,8 @@ global _ft_puts
 section .text
 	extern _ft_strlen
 _ft_puts:
+	cmp		rdi, 0		;test NULL
+	je		ret_
 	mov		rsi, rdi	;arg1 = buf
 	call	_ft_strlen
 
@@ -14,4 +16,6 @@ _ft_puts:
 	;ssize_t write(int fildes, const void *buf, size_t nbyte)
 	mov     rax, 0x2000004 ; write
 	syscall
+
+ret_:
 	ret
