@@ -5,4 +5,4 @@ test
 *.o
 libfts.a
 libfts/a.out
-libfts/main.c
+test_stdout

@@ -40,7 +40,7 @@ prog:
 
 test:
 	make -Ctests
-
+	clang tests/main.c -o test_stdout -Llibfts/ -lfts -Wl,-no_pie
 
 clean:
 	make RULE=clean
