@@ -3,6 +3,8 @@ Basic functions all writed in Intel asm.
 
 To test run "make test" in the repository root. 
 
+Final grade : 100%
+
 ## Helpfull links
 Tutorial to create a function in assembly which usable in c :
 
